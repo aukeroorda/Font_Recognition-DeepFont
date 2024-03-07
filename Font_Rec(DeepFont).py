@@ -7,7 +7,7 @@
 from matplotlib.pyplot import imshow
 import matplotlib.cm as cm
 import matplotlib.pylab as plt
-from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 import PIL
 from PIL import ImageFilter
@@ -24,12 +24,13 @@ from sklearn.model_selection import train_test_split
 from keras.utils import to_categorical
 from keras import callbacks
 from keras.models import Sequential
-from keras.layers.normalization import BatchNormalization
+# from keras.layers.normalization import BatchNormalization
+from tensorflow.keras.layers import BatchNormalization # Not sure if this is a correct substitute for the above import
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D , UpSampling2D ,Conv2DTranspose
 from keras import backend as K
 
-get_ipython().run_line_magic('matplotlib', 'inline')
+# get_ipython().run_line_magic('matplotlib', 'inline')
 
 
 # In[ ]:
@@ -228,8 +229,11 @@ aug = ImageDataGenerator(rotation_range=30, width_shift_range=0.1,height_shift_r
 # In[ ]:
 
 
-K.set_image_dim_ordering('tf')
-
+# K.set_image_dim_ordering('tf')
+# Substitute for the above line, based on https://stackoverflow.com/a/66460620
+# Channel order based on this answer: tf -> 'channels_last'
+# K.common.set_image_data_format('channels_last')
+K.set_image_data_format('channels_last')
 
 # In[ ]:
 
@@ -282,7 +286,8 @@ def create_model():
 batch_size = 128
 epochs = 50
 model= create_model()
-sgd = optimizers.SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+# sgd = optimizers.SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+sgd = optimizers.SGD(learning_rate=0.01, weight_decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='mean_squared_error', optimizer=sgd, metrics=['accuracy'])
 
 
@@ -291,7 +296,8 @@ model.compile(loss='mean_squared_error', optimizer=sgd, metrics=['accuracy'])
 
 early_stopping=callbacks.EarlyStopping(monitor='val_loss', min_delta=0, patience=10, verbose=0, mode='min')
 
-filepath="top_model.h5"
+# filepath="top_model.h5"
+filepath="top_model.keras"
 
 checkpoint = callbacks.ModelCheckpoint(filepath, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
 

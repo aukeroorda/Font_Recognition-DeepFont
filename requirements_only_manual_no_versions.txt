@@ -1,0 +1,7 @@
+imutils
+matplotlib
+opencv-python
+pip
+pipdeptree
+scikit-learn
+tensorflow
