@@ -326,7 +326,8 @@ print('Test accuracy:', score[1])
 
 
 from keras.models import load_model
-model = load_model('top_model.h5')
+# model = load_model('top_model.h5')
+model = load_model(filepath) # Replaced with filepath, as the model name has changed to .keras
 
 
 # In[ ]:

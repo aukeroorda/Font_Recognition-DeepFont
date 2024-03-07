@@ -6,6 +6,7 @@
 module purge 
 # Load python module
 module load Python/3.11.3-GCCcore-12.3.0
+# module load TensorFlow/2.11.0-foss-2022a-CUDA-11.7.0 # XXX This lowers the python version to 3.10.something
 # module load SciPy-bundle/2023.07-gfbf-2023a # Not sure if this is correct, there is no matching python name in the module name.
 
 # Activate the venv
