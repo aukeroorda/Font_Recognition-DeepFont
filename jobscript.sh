@@ -28,6 +28,7 @@ pip install --upgrade pip wheel
 pip install -r requirements.txt
 
 # Run commands
+python 'Font_Rec\(DeepFont\).py'
 
 # Deactivate the venv
 deactivate
