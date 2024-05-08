@@ -1,5 +1,18 @@
 # How this model is run on habrok
 
+### Downloading Adobe_VFR_release
+
+```shell
+curl -L -o newName.zip https://www.dropbox.com/sh/o320sowg790cxpe/AADDmdwQ08GbciWnaC20oAmna?e=1?dl=1
+```
+
+Based on https://stackoverflow.com/a/37573857
+
+## More resources on DeepFont:
+
+Including something about BCR (and code to generate this?)
+https://github.com/tesseract-ocr/tesseract/issues/996
+
 ### Constructing of venv
 
 ```sh
@@ -13,8 +26,6 @@ pip install --upgrade wheel
 ```
 
 ### Load modules instead of installing using pip:
-
-? is this even worth it? For the packages:
 
 - imutils
 - matplotlib
